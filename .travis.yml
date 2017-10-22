@@ -23,10 +23,10 @@ before_install:
       JAVA_ETC=java-7-openjdk
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
-      echo | openssl s_client -showcerts -connect services.gradle.org:443 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/gradle.crt
-      sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts -file /tmp/gradle.crt
-      sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/jssecacerts -file /tmp/gradle.crt
-      keytool -list -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts
+      JAVA7_HOME=`echo ${JAVA_HOME} | sed -e s/6/7/g`
+      echo ${JAVA7_HOME}
+      sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
+      sudo cp ${JAVA7_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts
     fi
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar
@@ -35,6 +35,11 @@ before_install:
       sudo perl -pi.bak -e 's/^(security\.provider\.)([0-9]+)/$1.($2+1)/ge' /etc/${JAVA_ETC}/security/java.security
       echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/${JAVA_ETC}/security/java.security
     fi
+
+#      echo | openssl s_client -showcerts -connect services.gradle.org:443 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/gradle.crt
+#      sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts -file /tmp/gradle.crt
+#      sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/jssecacerts -file /tmp/gradle.crt
+#      keytool -list -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts
 
 install: true
 

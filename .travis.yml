@@ -35,8 +35,9 @@ before_install:
 install: true
 
 before_script:
-  sudo apt-get purge --auto-remove ca-certificates-java
-  sudo apt-get install ca-certificates-java
+  - |
+    sudo apt-get purge --auto-remove ca-certificates-java
+    sudo apt-get install ca-certificates-java
 #  - |
 #    if [ $TRAVIS_JDK_VERSION -eq "openjdk6" ] || [ $TRAVIS_JDK_VERSION -eq "openjdk6" ]; then
 #      export _JAVA_OPTIONS=-Xms1024m\ -Xmx2048m

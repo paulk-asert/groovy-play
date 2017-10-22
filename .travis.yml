@@ -23,7 +23,7 @@ before_install:
       JAVA_ETC=java-7-openjdk
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
-      ${JAVA_HOME}/bin/keytool -import -alias gradle.org -storepass changeit -trustcacerts -keystore ${JAVA_HOME}/jre/lib/security/cacerts -file gradle.crt
+      ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -storepass changeit -trustcacerts -keystore ${JAVA_HOME}/jre/lib/security/cacerts -file gradle.crt
     fi
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar

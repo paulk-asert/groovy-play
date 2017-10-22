@@ -23,8 +23,7 @@ before_install:
       JAVA_ETC=java-7-openjdk
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
-      sudo dpkg --remove ca-certificates-java
-      sudo apt-get install ca-certificates-java
+      sudo dpkg-reconfigure ca-certificates-java
     fi
     if [ $TRAVIS_JDK_VERSION -eq "openjdk6" ] || [ $TRAVIS_JDK_VERSION -eq "openjdk6" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar

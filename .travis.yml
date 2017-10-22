@@ -27,6 +27,8 @@ before_install:
       echo ${JAVA7_HOME}
       ls -l ${JAVA_HOME}/jre/lib/security/
       ls -l ${JAVA7_HOME}/jre/lib/security/
+      ls -l /etc/ssl/certs/java
+      ls -l /etc/${JAVA_ETC}/security
       sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
       sudo cp ${JAVA7_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts
     fi

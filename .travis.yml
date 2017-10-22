@@ -24,11 +24,6 @@ before_install:
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
       JAVA7_HOME=`echo ${JAVA_HOME} | sed -e s/java-6/java-7/`
-      echo ${JAVA7_HOME}
-      ls -l ${JAVA7_HOME}/jre/lib/security/
-      ls -l /etc/ssl/certs/java
-      sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
-      sudo cp jssecacerts ${JAVA_HOME}/jre/lib/security/cacerts
       sudo ln -s ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/jssecacerts
       ls -l ${JAVA_HOME}/jre/lib/security/
     fi
@@ -40,6 +35,10 @@ before_install:
       echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/${JAVA_ETC}/security/java.security
     fi
 
+#      ls -l ${JAVA7_HOME}/jre/lib/security/
+#      ls -l /etc/ssl/certs/java
+#      sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
+#      sudo cp jssecacerts ${JAVA_HOME}/jre/lib/security/cacerts
 #      sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
 #      echo | openssl s_client -showcerts -connect services.gradle.org:443 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/gradle.crt
 #      sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts -file /tmp/gradle.crt

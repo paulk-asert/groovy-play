@@ -12,6 +12,8 @@ addons:
     packages:
       - openjdk-6-jdk
 
+os: osx
+
 dist: trusty
 
 # use bouncycastle security provider to avoid:

@@ -6,6 +6,7 @@ matrix:
   include:
     - jdk: openjdk6
     - jdk: oraclejdk8
+
 addons:
   apt:
     packages:
@@ -22,7 +23,7 @@ before_install:
       JAVA_ETC=java-7-openjdk
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
-      sudo apt-get purge ca-certificates-java
+      sudo sudo dpkg --remove ca-certificates-java
       sudo apt-get install ca-certificates-java
     fi
     if [ $TRAVIS_JDK_VERSION -eq "openjdk6" ] || [ $TRAVIS_JDK_VERSION -eq "openjdk6" ]; then

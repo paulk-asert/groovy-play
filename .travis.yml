@@ -27,6 +27,8 @@ before_install:
       echo ${JAVA7_HOME}
       sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
       sudo cp ${JAVA7_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts
+      sudo mv ${JAVA_HOME}/jre/lib/security/jssecacerts ${JAVA_HOME}/jre/lib/security/jssecacerts.orig
+      sudo cp ${JAVA7_HOME}/jre/lib/security/jssecacerts ${JAVA_HOME}/jre/lib/security/jssecacerts
     fi
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar

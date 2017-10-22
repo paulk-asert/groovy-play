@@ -25,6 +25,8 @@ before_install:
       JAVA_ETC=java-6-openjdk
       JAVA7_HOME=`echo ${JAVA_HOME} | sed -e s/6/7/g`
       echo ${JAVA7_HOME}
+      ls -l ${JAVA_HOME}/jre/lib/security/
+      ls -l ${JAVA7_HOME}/jre/lib/security/
       sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
       sudo cp ${JAVA7_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts
       sudo mv ${JAVA_HOME}/jre/lib/security/jssecacerts ${JAVA_HOME}/jre/lib/security/jssecacerts.orig

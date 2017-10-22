@@ -29,14 +29,13 @@ before_install:
       sudo mv $BCPROV_FILENAME /usr/lib/jvm/java-6-openjdk-amd64/jre/lib/ext
       sudo perl -pi.bak -e 's/^(security\.provider\.)([0-9]+)/$1.($2+1)/ge' /etc/java-6-openjdk/security/java.security
       echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/java-6-openjdk/security/java.security
+      sudo apt-get purge --auto-remove ca-certificates-java
+      sudo apt-get install ca-certificates-java
     fi
 
 install: true
 
-before_script:
-  - |
-    sudo apt-get purge --auto-remove ca-certificates-java
-    sudo apt-get install ca-certificates-java
+#before_script:
 #  - |
 #    if [ $TRAVIS_JDK_VERSION -eq "openjdk6" ] || [ $TRAVIS_JDK_VERSION -eq "openjdk6" ]; then
 #      export _JAVA_OPTIONS=-Xms1024m\ -Xmx2048m

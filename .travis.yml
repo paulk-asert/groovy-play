@@ -26,6 +26,7 @@ before_install:
       echo | openssl s_client -showcerts -connect services.gradle.org:443 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/gradle.crt
       sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts -file /tmp/gradle.crt
       sudo ${JAVA_HOME}/bin/keytool -import -alias gradle.org -noprompt -trustcacerts -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/jssecacerts -file /tmp/gradle.crt
+      keytool -list -storepass changeit -keystore ${JAVA_HOME}/jre/lib/security/cacerts
     fi
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar

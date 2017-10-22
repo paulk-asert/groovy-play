@@ -29,7 +29,7 @@ before_install:
       ls -l /etc/ssl/certs/java
       sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
       sudo cp jssecacerts ${JAVA_HOME}/jre/lib/security/cacerts
-      sudo ln -s cacerts jssecacerts
+      sudo ln -s ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/jssecacerts
       ls -l ${JAVA_HOME}/jre/lib/security/
     fi
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then

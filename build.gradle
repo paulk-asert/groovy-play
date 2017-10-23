@@ -4,15 +4,16 @@ version '1.0-SNAPSHOT'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.8
+//sourceCompatibility = 1.8
 
 repositories {
-    maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local/" }
+//    maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local/" }
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:3.0.0-SNAPSHOT'
+//    compile 'org.codehaus.groovy:groovy-all:3.0.0-SNAPSHOT'
 //    compile 'org.codehaus.groovy:groovy-all:2.6.0-alpha-1'
+//    compile 'org.codehaus.groovy:groovy-all:2.5.0-beta-2'
     testCompile 'junit:junit:4.12'
 }

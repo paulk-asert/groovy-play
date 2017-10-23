@@ -23,9 +23,6 @@ before_install:
       JAVA_ETC=java-7-openjdk
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
-      JAVA7_HOME=`echo ${JAVA_HOME} | sed -e s/java-6/java-7/`
-      sudo ln -s ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/jssecacerts
-      ls -l ${JAVA_HOME}/jre/lib/security/
     fi
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar
@@ -35,6 +32,9 @@ before_install:
       echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/${JAVA_ETC}/security/java.security
     fi
 
+#      JAVA7_HOME=`echo ${JAVA_HOME} | sed -e s/java-6/java-7/`
+#      sudo ln -s ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/jssecacerts
+#      ls -l ${JAVA_HOME}/jre/lib/security/
 #      ls -l ${JAVA7_HOME}/jre/lib/security/
 #      ls -l /etc/ssl/certs/java
 #      sudo mv ${JAVA_HOME}/jre/lib/security/cacerts ${JAVA_HOME}/jre/lib/security/cacerts.orig
@@ -49,15 +49,20 @@ before_install:
 
 install: true
 
-#before_script:
-#  - |
-#    if [ $TRAVIS_JDK_VERSION -eq "openjdk6" ] || [ $TRAVIS_JDK_VERSION -eq "openjdk6" ]; then
-#      export _JAVA_OPTIONS=-Xms1024m\ -Xmx2048m
-#    else
-#      unset _JAVA_OPTIONS
-#    fi
+before_script:
+  - |
+    if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
+      export _JAVA_OPTIONS=-Xms1024m\ -Xmx2048m
+      if [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
+        jdk_switcher use openjdk7
+        gradlew assemble
+        jdk_switcher use openjdk6
+      fi
+    else
+      unset _JAVA_OPTIONS
+    fi
 
-script: travis_wait 60 ./gradlew test
+script: travis_wait 60 ./gradlew clean test
 
 # As recommended in:
 # https://docs.travis-ci.com/user/languages/java/#Caching

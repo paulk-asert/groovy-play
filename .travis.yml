@@ -61,7 +61,7 @@ before_script:
       unset _JAVA_OPTIONS
     fi
 
-script: travis_wait 60 ./gradlew clean test
+script: ./gradlew clean test
 
 # As recommended in:
 # https://docs.travis-ci.com/user/languages/java/#Caching

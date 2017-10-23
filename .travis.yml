@@ -7,10 +7,10 @@ matrix:
     - jdk: openjdk6
     - jdk: oraclejdk8
 
-addons:
-  apt:
-    packages:
-      - openjdk-6-jdk
+#addons:
+#  apt:
+#    packages:
+#      - openjdk-6-jdk
 
 dist: precise
 

@@ -23,7 +23,7 @@ before_install:
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       JAVA_ETC=java-6-openjdk
     fi
-    if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
+    if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk7" ]; then
       BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar
       wget "https://bouncycastle.org/download/${BCPROV_FILENAME}"
       sudo mv $BCPROV_FILENAME ${JAVA_HOME}/jre/lib/ext
@@ -50,11 +50,11 @@ install: true
 
 before_script:
   - |
-    if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
+    if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk7" ]; then
       export _JAVA_OPTIONS=-Xms1024m\ -Xmx2048m
       if [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
         jdk_switcher use oraclejdk8
-        gradlew assemble
+        ./gradlew assemble
         jdk_switcher use openjdk6
       fi
     else

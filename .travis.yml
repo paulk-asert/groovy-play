@@ -4,15 +4,14 @@ sudo: required
 
 matrix:
   include:
-    - jdk: openjdk6
     - jdk: oraclejdk8
+    - jdk: openjdk7
+    - jdk: openjdk6
 
-#addons:
-#  apt:
-#    packages:
-#      - openjdk-6-jdk
-
-dist: precise
+addons:
+  apt:
+    packages:
+      - openjdk-6-jdk
 
 # use bouncycastle security provider to avoid:
 # javax.net.ssl.SSLException: ... java.security.InvalidKeyException: EC parameters error
@@ -54,7 +53,7 @@ before_script:
     if [ $TRAVIS_JDK_VERSION == "openjdk6" ] || [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
       export _JAVA_OPTIONS=-Xms1024m\ -Xmx2048m
       if [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
-        jdk_switcher use openjdk7
+        jdk_switcher use oraclejdk8
         gradlew assemble
         jdk_switcher use openjdk6
       fi

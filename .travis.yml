@@ -17,7 +17,6 @@ addons:
 # javax.net.ssl.SSLException: ... java.security.InvalidKeyException: EC parameters error
 before_install:
   - |
-    echo ${JAVA_HOME}
     if [ $TRAVIS_JDK_VERSION == "openjdk7" ]; then
       JAVA_ETC=java-7-openjdk
     elif [ $TRAVIS_JDK_VERSION == "openjdk6" ]; then
